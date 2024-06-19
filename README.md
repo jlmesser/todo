@@ -25,8 +25,8 @@ task breakdown:
 - [x] get postman request 200
 - [x] create endpoints and DTOs, hard code responses in correct shape
 - [x] service layer (save data in memory)
-- [ ] set up postgres and flyway
-- [ ] repo layer
+- [x] set up postgres and flyway
+- [x] repo layer
 - [ ] handle edge cases and errors
 - [ ] test everything + create postman collection
 - [ ] swagger, javadocs
