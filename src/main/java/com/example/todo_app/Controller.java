@@ -2,6 +2,7 @@ package com.example.todo_app;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.rmi.ServerException;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -37,10 +39,10 @@ public class Controller {
 
     @GetMapping(value = "/task/{taskId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TaskDto> getTask(@PathVariable UUID taskId) throws ServerException {
-        TaskDto task = taskService.getTask(taskId);
+        Optional<TaskDto> optionalTaskDto = taskService.getTask(taskId);
 
-        if (task != null) {
-            return ResponseEntity.ok(task);
+        if (optionalTaskDto.isPresent()) {
+            return ResponseEntity.ok(optionalTaskDto.get());
         } else {
             throw new ServerException("Error in creating the User resource. Try Again.");
         }
@@ -72,13 +74,13 @@ public class Controller {
     }
 
     @DeleteMapping(value = "/task/{taskId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<TaskDto> deleteTask(@PathVariable UUID taskId) throws ServerException {
+    public ResponseEntity<HttpStatus> deleteTask(@PathVariable UUID taskId) throws ServerException {
 
-        TaskDto task = taskService.deleteTask(taskId);
 
-        if (task != null) {
-            return ResponseEntity.ok(task);
-        } else {
+        try {
+            taskService.deleteTask(taskId);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
             throw new ServerException("Error in creating the User resource. Try Again.");
         }
     }

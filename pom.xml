@@ -75,6 +75,18 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>10.7.1</version>
+				<configuration>
+					<user>myuser</user>
+					<password>secret</password>
+					<schemas>
+						<schema>mydatabase</schema>
+					</schemas>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 

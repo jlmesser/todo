@@ -1,16 +1,34 @@
 package com.example.todo_app;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+import java.io.Serializable;
 import java.util.UUID;
 
-public class TaskDto {
-    public String description;
-    public UUID id;
-    public boolean complete;
+@Entity
+@Table(name = "tasks", schema = "mydatabase")
+public class TaskDto implements Serializable {
 
-    public TaskDto(String description, UUID id, boolean complete) {
+    @Column(nullable = false, name = "description")
+    public String description;
+
+    @Id
+    public UUID id;
+
+    @Column(nullable = false, name = "completed")
+    public boolean completed;
+
+    public TaskDto(String description, UUID id, boolean completed) {
         this.description = description;
         this.id = id;
-        this.complete = complete;
+        this.completed = completed;
+    }
+
+    public TaskDto() {
+
     }
 
     public String getDescription() {
@@ -29,11 +47,11 @@ public class TaskDto {
         this.id = id;
     }
 
-    public boolean isComplete() {
-        return complete;
+    public boolean isCompleted() {
+        return completed;
     }
 
-    public void setComplete(boolean complete) {
-        this.complete = complete;
+    public void setCompleted(boolean complete) {
+        this.completed = complete;
     }
 }
