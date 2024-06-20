@@ -1,4 +1,17 @@
 services:
+  todo-app:
+    container_name: 'todo-app'
+    build:
+      dockerfile: 'Dockerfile'
+    image: 'todo-app:latest'
+    ports:
+      - '8080:8080'
+    depends_on:
+      - 'postgres'
+    links:
+      - "postgres"
+      - "postgres:database"
+      - "postgres:postgres"
   postgres:
     image: 'postgres:latest'
     environment:

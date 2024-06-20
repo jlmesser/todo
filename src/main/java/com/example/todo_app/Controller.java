@@ -49,7 +49,7 @@ public class Controller {
     }
 
     @PostMapping(path = "/task", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<TaskDto> createTask(@RequestBody TaskDto newTask, HttpServletRequest request) throws ServerException {
+    public ResponseEntity<TaskDto> createTask(@RequestBody TaskDto newTask, HttpServletRequest request) throws Exception {
 
         TaskDto task = taskService.addTask(newTask);
 
@@ -62,7 +62,7 @@ public class Controller {
     }
 
     @PutMapping(value = "/task", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<TaskDto> updateTask(@RequestBody TaskDto updatedTask) throws ServerException {
+    public ResponseEntity<TaskDto> updateTask(@RequestBody TaskDto updatedTask) throws Exception {
 
         TaskDto task = taskService.updateTask(updatedTask);
 
