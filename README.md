@@ -27,9 +27,15 @@ task breakdown:
 - [x] service layer (save data in memory)
 - [x] set up postgres and flyway
 - [x] repo layer
-- [ ] handle edge cases and errors
-- [ ] test everything + create postman collection
-- [ ] swagger, javadocs
-- [ ] docker compose
+- [x] handle edge cases and errors
+- [x] test everything + create postman collection
+- [x] swagger, javadocs
+- [x] docker compose
 - [ ] final cleanup + readme with prereqs
 - [ ] investigate front end stuff
+
+
+out of scope/future work
+- request validation
+- parameterized tests
+- non happy path

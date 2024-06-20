@@ -5,9 +5,10 @@ services:
       dockerfile: 'Dockerfile'
     image: 'todo-app:latest'
     ports:
-      - '8080:8080'
+      - '8081:8080'
     depends_on:
       - 'postgres'
+      - 'flyway'
     links:
       - "postgres"
       - "postgres:database"
@@ -20,3 +21,10 @@ services:
       - 'POSTGRES_USER=myuser'
     ports:
       - '5432:5432'
+  flyway:
+    image: flyway/flyway
+    command: -url=jdbc:postgresql://postgres:5432/mydatabase -schemas=mydatabase -user=myuser -password=secret -connectRetries=60 migrate
+    volumes:
+      - ./src/main/resources/db/migration/:/flyway/sql/
+    depends_on:
+      - postgres
